@@ -3,14 +3,16 @@ const note=[{
     body:"I would like to go to spain"
 },{
     title:"Hobbits to work on",
-    body:"Exercise,Eatiing a bit better"
+    body:"Exercise,Eating a bit better"
 },{
     title:"Office modificatuion",
     body:"Get a new seat"
 }]
-const filternote=note.filter(function(note){
-    const istitleMatch=note.title.toLowerCase().includes('ne')
-    const isbodyMatch=note.body.toLowerCase().includes('ne')
-    return istitleMatch || isbodyMatch
-})  
-console.log(filternote)
+const findNote=function(note,query){    
+    return note.filter(function(note){
+        const istitleMatch=note.title.toLowerCase().includes(query)
+        const isbodyMatch=note.body.toLowerCase().includes(query)
+        return istitleMatch || isbodyMatch
+    })
+}  
+console.log(findNote(note,'next'))
