@@ -31,4 +31,5 @@ const account ={
 account.addExpense("Rent",950)
 account.addExpense("Coffee",2)
 account.addIncome("job",1000)
+account.addIncome("free",10)
 console.log(account.summary())
