@@ -16,9 +16,9 @@ const todos = [{
 }]
 const sortNote = function(note) {
     note.sort(function(a, b) {
-        if (a.title.toLowerCase() < b.title.toLowerCase()) {
+        if (!a.title.completed && b.completed) {
             return -1
-        } else if (a.title.toLowerCase() > b.title.toLowerCase()) {
+        } else if (a.title.completed && !b.title.completed) {
             return 1
         } else {
             return 0
