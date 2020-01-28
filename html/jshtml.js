@@ -1,10 +1,13 @@
-// document.body.innerHTML = '<h3>not Working with js...</h3>'
-// const p = document.querySelector('h1')
-// console.log(p)
-const ps = document.querySelectorAll('p')
-ps.forEach(function(p) {
-    p.textContent = "***********"
+const notes = [{
+    title: "My next trip",
+    body: "I would like to visit spain"
+}, {
+    title: "Habbits to week on",
+    body: "Exercice,eating ..."
+}, {
+    title: "offivce modification",
+    body: "get a new set"
+}]
+document.querySelector('button').addEventListener('click', function(e) {
+    e.target.textContent = 'the button was clicked'
 })
-const paragraphs = document.createElement('p')
-paragraphs.textContent = 'this is new paragraphs from JavaScript'
-document.querySelector('body').appendChild(paragraphs)
