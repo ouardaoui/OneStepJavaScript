@@ -25,6 +25,9 @@ note.forEach(function(note) {
     p.textContent = note.title
     document.querySelector('body').appendChild(p)
 })
-document.querySelector('button').addEventListener('click', function(e) {
+document.querySelector('#add-todo').addEventListener('click', function(e) {
     console.log('Add a new to do ...')
+})
+document.querySelector('#new-todo').addEventListener('input', function(e) {
+    console.log(e.target.value)
 })
