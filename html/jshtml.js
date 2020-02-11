@@ -30,7 +30,8 @@ document.querySelector('#remove-all').addEventListener('click', function() {
         note.remove()
     })
 })
-document.querySelector('#search-text').addEventListener('input', function(e) {
+document.querySelector('#search-text').addEventListener('change', function(e) {
+    console.log(e.target.value)
     filters.searchText = e.target.value
     renderNotes(notes, filters)
 
