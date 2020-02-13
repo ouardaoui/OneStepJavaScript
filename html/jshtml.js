@@ -11,6 +11,8 @@ const notes = [{
 const filters = {
     searchText: ""
 }
+localStorage.setItem('location', 'Philadelphia')
+console.log(localstrorage.getItem('location'))
 const renderNotes = function(notes, filters) {
     const filteredNotes = notes.filter(function(note) {
         return note.title.toLowerCase().includes(filters.searchText.toLowerCase())
