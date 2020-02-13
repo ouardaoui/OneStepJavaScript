@@ -15,17 +15,21 @@ const todos = [{
     completed: true
 }]
 const filters = {
-    searchText = ""
+    searchText: "",
+    hideCompleted: false
 }
 const renderTodos = function(todos, filters) {
-    const filteredTodos = todos.filter(function(todo) {
-        return todo.text.toLowerCase().includes(filters.searchText.toLowerCase())
+    let filteredTodos = todos.filter(function(todo) {
+        const searchTextMatch = todo.text.toLowerCase().includes(filters.searchText.toLowerCase())
+        const hideCompletedMatch = !filters.hideCompleted || !todo.completed
+        return searchTextMatch && hideCompletedMatch
     })
 
-    const incompleted = note.filteredTodos(function(n) {
+    const incompleted = filteredTodos.filter(function(n) {
         return !n.completed
     })
-    document.querySelector('#todos').innerHTMl = ''
+
+    document.querySelector('#todos').innerHTML = ''
 
     const sammury = document.createElement('h2')
     sammury.textContent = `you have ${incompleted.length} todos left`
@@ -40,14 +44,22 @@ const renderTodos = function(todos, filters) {
 renderTodos(todos, filters)
 
 // listen of new todos
-document.querySelector('#add-todo').addEventListener('click', function(e) {
-        console.log('Add a new to do ...')
-    })
-    // listen of todos text change
-document.querySelector('#new-todo').addEventListener('input', function(e) {
-    console.log(e.target.value)
-})
-document.querySelector('#search-text').addEvenListenner('input', function(e) {
+
+
+document.querySelector('#search-text').addEventListener('input', function(e) {
     filters.searchText = e.target.value
+    renderTodos(todos, filters)
+})
+document.querySelector("#new-todo").addEventListener('submit', function(e) {
+    e.preventDefault()
+    todos.push({
+        text: e.target.elements.text.value,
+        completed: false
+    })
+    renderTodos(todos, filters)
+    e.target.elements.text.value = ""
+})
+document.querySelector('#check').addEventListener('change', function(e) {
+    filters.hideCompleted = e.target.checked
     renderTodos(todos, filters)
 })

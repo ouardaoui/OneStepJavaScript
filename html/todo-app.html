@@ -7,10 +7,15 @@
 
 <body>
     <h1>Todo App</h1>
-    <input id='new-todo' type='text' placeholder="enter someting to do ...">
-    <button id='add-todo'>add todo</button>
     <input id='search-text' type='text' placeholder="filter todos">
+    <label>
+        <input id="check" type="checkbox">Hide Completed
+    </label>
     <div id="todos"></div>
+    <form id="new-todo">
+        <input type="text" placeholder="something to do" name="text">
+        <button>add todo</button>
+    </form>
     <script src="todo-app.js"></script>
 </body>
 
