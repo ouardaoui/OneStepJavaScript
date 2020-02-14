@@ -9,10 +9,11 @@ const notes = [{
     body: "get a new set"
 }]
 const filters = {
-    searchText: ""
-}
-localStorage.setItem('location', 'Philadelphia')
-console.log(localstrorage.getItem('location'))
+        searchText: ""
+    }
+    //localStorage.setItem('location', 'philadilphia')
+console.log(localStorage.getItem('location'))
+
 const renderNotes = function(notes, filters) {
     const filteredNotes = notes.filter(function(note) {
         return note.title.toLowerCase().includes(filters.searchText.toLowerCase())
