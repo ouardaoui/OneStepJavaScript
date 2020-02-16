@@ -1,45 +1,7 @@
-const todos = [{
-    text: 'order cat food',
-    completed: false
-}, {
-    text: 'Clean kitchen',
-    completed: true
-}, {
-    text: 'do work',
-    completed: false
-}, {
-    text: 'buy food',
-    completed: true
-}, {
-    text: 'Exercice',
-    completed: true
-}]
+const todos = getSavedTodos()
 const filters = {
     searchText: "",
     hideCompleted: false
-}
-const renderTodos = function(todos, filters) {
-    let filteredTodos = todos.filter(function(todo) {
-        const searchTextMatch = todo.text.toLowerCase().includes(filters.searchText.toLowerCase())
-        const hideCompletedMatch = !filters.hideCompleted || !todo.completed
-        return searchTextMatch && hideCompletedMatch
-    })
-
-    const incompleted = filteredTodos.filter(function(n) {
-        return !n.completed
-    })
-
-    document.querySelector('#todos').innerHTML = ''
-
-    const sammury = document.createElement('h2')
-    sammury.textContent = `you have ${incompleted.length} todos left`
-    document.querySelector('#todos').appendChild(sammury)
-
-    filteredTodos.forEach(function(todo) {
-        const p = document.createElement('p')
-        p.textContent = todo.text
-        document.querySelector('#todos').appendChild(p)
-    })
 }
 renderTodos(todos, filters)
 
@@ -56,6 +18,7 @@ document.querySelector("#new-todo").addEventListener('submit', function(e) {
         text: e.target.elements.text.value,
         completed: false
     })
+    saveTodos(todos)
     renderTodos(todos, filters)
     e.target.elements.text.value = ""
 })
