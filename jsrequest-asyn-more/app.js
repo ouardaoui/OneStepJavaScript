@@ -1,3 +1,4 @@
+//callback
 // getCountry('MA', (error, country) => {
 //     if (error) {
 //         console.log(error)
@@ -8,10 +9,23 @@
 //     }
 // })
 
-getPromise("MA").then((country) =>{
-    console.log(country.name)
-    document.getElementById("name").innerHTML =country.name
 
-},(err) => {
-    console.log(err) 
+// promise
+// getPromise("MA").then((country) =>{
+//     console.log(country.name)
+//     document.getElementById("name").innerHTML =country.name
+
+// },(err) => {
+//     console.log(err) 
+// })
+
+//fetch
+
+
+getLocation().then((location) => {
+    return getCountry(location.country)
+}).then((country) => {
+    console.log(country.name)
+}).catch((err) => {
+    console.log(`Error: ${err}`)
 })
