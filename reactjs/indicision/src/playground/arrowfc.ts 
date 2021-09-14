@@ -1,0 +1,8 @@
+let multiplier = {
+    num : [2,4,6,7,4],
+    multiplyby : 3,
+    multiply () {
+        return this.num.map((num) => num * this.multiplyby);
+    }
+}
+console.log(multiplier.multiply())
