@@ -6,32 +6,42 @@ function App() {
       title : "title",
       subtitle : "subtitle",
     }
-    const [options,setOptions] =useState(["one","two"])
+    const [options,setOptions] =useState([])
     const onFormeSubmit = (e) => {
       e.preventDefault();
       const option = e.target.elements.option.value;
       setOptions([...options,option])
-      console.log(option)
+  
       };
+    const onMakedecision = () => {
+      const randomNum = Math.floor(Math.random() * options.length)
+      const option = options[randomNum]
+      alert(option)
+    }
   return (
     <div>
       <h1>{dic.title}</h1>
       {dic.subtitle && <p>{dic.subtitle}</p>}   
       <p>{options.length > 0 ? "Here are ur options" : "no options"}</p>
-      <p>{options.length}</p>
+      <button disabled = {options.length===0} onClick={onMakedecision}>what should i do ?</button>
+      <button onClick={() => setOptions([])}>Remove</button>
       <ol>
-        <li>{options[0]}</li>
-        <li>{options[1]}</li>
+      {
+        options.map((option) => {
+          return(<li key={option}>{option}</li>);
+        })
+      }
       </ol>
-      <form onSubmit={onFormeSubmit}>
-        <input type="text" name="option"></input>
-        <button>Add Option</button>
+      <form onSubmit={onFormeSubmit} >
+        <input type="text" name="option" id="submit"></input>
+        <button >Add Option</button>
       </form>
     </div>
     
     
   );
 }
+
 // function App() {
 //   const [count,setCount] = useState(0)
 //   return(
