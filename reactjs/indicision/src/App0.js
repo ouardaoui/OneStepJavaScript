@@ -1,7 +1,6 @@
 import React, { useState, useEffect }from 'react';
 import './App.css';
 
-function App0() {
     class Toggle extends React.Component {
         constructor(props){
             super(props);
@@ -23,16 +22,10 @@ function App0() {
                         <div> 
                             <p>hey ,these are some details you can now see!</p>
                         </div>
-                    };
+                    }
                 </div>
             );
         };
     };
-    return(
-        <Toggle />
-    )
 
-};
-
-
-export default App0;
+export default Toggle;

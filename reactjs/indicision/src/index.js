@@ -1,4 +1,4 @@
-import React ,{useState} from 'react';
+import React  from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
@@ -9,7 +9,7 @@ import App1 from "./App1"
 
 ReactDOM.render(
   <React.StrictMode>
-    <App0 />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
