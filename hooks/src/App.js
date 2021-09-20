@@ -1,19 +1,19 @@
-import React,{useState} from 'react';
+import React from 'react';
 import BookList from './components/BookList';
-import Header from './components/Header';
 import Navbar from './components/Navbar';
-import ThemeToggle from './components/ThemeToggle';
 import { ThemeProvider } from './contexts/ThemeContext';
+import ThemeToggle from './components/ThemeToggle';
 
 function App() {
   return (
     <div className="App">
       <ThemeProvider>
-        <ThemeToggle /> 
+        <Navbar />
+        <BookList />
+        <ThemeToggle />
       </ThemeProvider>
     </div>
   );
 }
 
 export default App;
-
