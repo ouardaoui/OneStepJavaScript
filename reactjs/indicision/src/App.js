@@ -1,6 +1,19 @@
-import React ,{useState} from "react";
+import React ,{useEffect, useState} from "react";
 const App =()=> {
   const [options,setOptions] =useState(["first thing","scond thing"])
+  useEffect(() => {
+    const data = localStorage.getItem("options")
+    if(data){
+      setOptions(JSON.parse(data))
+    }
+  },[])
+  
+  useEffect(()=>{
+    const json = JSON.stringify(options)
+    localStorage.setItem("options",json)
+    
+  })
+  
   const handleDelecte = () =>  {
     setOptions([])
   }
@@ -60,6 +73,7 @@ const Options = (props) =>{
     return(
       <div>
         <button onClick={props.handleDelecte}>Remove All</button>
+        {props.options.length === 0 && <p>please add an option to get start</p>}
         <ul>
           {props.options.map((option) =><li><Option delecteOption={props.delecteOption} key={option} optiontext={option}/></li> )}
         </ul>
@@ -87,6 +101,9 @@ const AddOption = (props) =>{
     const option = e.target.elements.option.value.trim();
 
     setError(props.handleAddOption(option))
+    if(!error){
+      e.target.elements.option.value =""
+    }
   }
   
     return (
