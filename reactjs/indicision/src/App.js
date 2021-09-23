@@ -68,56 +68,5 @@ const Action = (props) => {
   </div>
   );
 }
-
-const Options = (props) =>{
-    return(
-      <div>
-        <button onClick={props.handleDelecte}>Remove All</button>
-        {props.options.length === 0 && <p>please add an option to get start</p>}
-        <ul>
-          {props.options.map((option) =><li><Option delecteOption={props.delecteOption} key={option} optiontext={option}/></li> )}
-        </ul>
-      </div>
-    )
-}
-
-const Option = (props) =>{
-    return(
-      <div > 
-        {props.optiontext}
-        <button onClick={()=>props.delecteOption(props.optiontext)}>remove</button>
-        
-      </div>
-    )
-}
-
-
-const AddOption = (props) =>{
-
-  const[error,setError] =useState(undefined)
-  const handleAddOption =(e) => {
-    e.preventDefault();
-
-    const option = e.target.elements.option.value.trim();
-
-    setError(props.handleAddOption(option))
-    if(!error){
-      e.target.elements.option.value =""
-    }
-  }
   
-    return (
-      <div>
-        {error && <p>{error}</p>}
-        <form onSubmit={handleAddOption}>
-          <input type="text" name="option" />
-          <button>Add Option</button>
-        </form>
-      </div>
-    );
-  
-}
-  
-
-
 export default App ;
