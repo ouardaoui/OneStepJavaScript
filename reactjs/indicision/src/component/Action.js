@@ -1,3 +1,4 @@
+
 const Action = (props) => {
     return(
     <div>
@@ -7,3 +8,4 @@ const Action = (props) => {
     </div>
     );
   }
+  export default Action ;

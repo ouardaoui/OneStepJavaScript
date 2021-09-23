@@ -1,4 +1,4 @@
-import Option from ".Option"
+import Option from "./Option"
 
 const Options = (props) =>{
     return(
@@ -11,3 +11,4 @@ const Options = (props) =>{
       </div>
     )
 }
+export default  Options;

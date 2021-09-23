@@ -1,3 +1,4 @@
+import react ,{useState} from "react";
 const AddOption = (props) =>{
 
     const[error,setError] =useState(undefined)
@@ -23,3 +24,4 @@ const AddOption = (props) =>{
       );
     
   }
+  export default AddOption ;

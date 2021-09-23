@@ -1,4 +1,10 @@
 import React ,{useEffect, useState} from "react";
+import AddOption from "./component/AddOption"
+import  Options  from "./component/Options";
+import  Header  from "./component/Header";
+import Action from "./component/Action";
+
+
 const App =()=> {
   const [options,setOptions] =useState(["first thing","scond thing"])
   useEffect(() => {
@@ -49,24 +55,7 @@ const App =()=> {
       </div>
       )
   }
-const Header =(props) => {
 
-  return(
-    <div>
-      <h1>{props.title}</h1>
-      <h2>{props.subtitle}</h2>
-    </div>
-  )
-}
 
-const Action = (props) => {
-  return(
-  <div>
-    <button
-    onClick={props.handlePick} 
-    disabled={props.handleAction}>what i should do ?</button>
-  </div>
-  );
-}
   
 export default App ;
