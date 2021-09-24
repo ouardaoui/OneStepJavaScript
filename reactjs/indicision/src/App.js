@@ -48,10 +48,12 @@ const App =()=> {
     }
     return(
       <div> 
-      <Header title ={text.title} subtitle={text.subtitle}/>
-        <Action handleAction={options.length == 0} handlePick = {handlePick}/>
-        <Options handleDelecte ={handleDelecte} options={options} delecteOption={delecteOptions}/>
-        <AddOption handleAddOption={handleAddOption}/>
+        <div className="container">
+          <Header title ={text.title} subtitle={text.subtitle}/>
+          <Action handleAction={options.length == 0} handlePick = {handlePick}/>
+          <Options handleDelecte ={handleDelecte} options={options} delecteOption={delecteOptions}/>
+          <AddOption handleAddOption={handleAddOption}/>
+        </div>      
       </div>
       )
   }
