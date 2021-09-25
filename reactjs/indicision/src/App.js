@@ -3,10 +3,12 @@ import AddOption from "./component/AddOption"
 import  Options  from "./component/Options";
 import  Header  from "./component/Header";
 import Action from "./component/Action";
+import OptionModal from "./component/OptionModel";
 
 
 const App =()=> {
-  const [options,setOptions] =useState(["first thing","scond thing"])
+  const [options,setOptions] =useState([])
+  const [selectoption,setSelectOption]=useState(undefined)
   useEffect(() => {
     const data = localStorage.getItem("options")
     if(data){
@@ -26,7 +28,7 @@ const App =()=> {
   const handlePick = () => {
     const randomNum = Math.floor(Math.random() * options.length)
     const option = options[randomNum]
-    alert(option)
+    setSelectOption(option)
   }
   const handleAddOption =(option)=> {
     if(!option){
@@ -41,7 +43,9 @@ const App =()=> {
   const delecteOptions = (optionToRmove) => {
     setOptions(options.filter((option)=>{return optionToRmove !== option}))
   }
-
+  const handleselectoption =() =>{
+    setSelectOption(undefined)
+  }
   const text = {
       title : "indicision",
       subtitle : "put your life in the hands of a computer"
@@ -51,12 +55,15 @@ const App =()=> {
         <div className="container">
           <Header title ={text.title} subtitle={text.subtitle}/>
           <Action handleAction={options.length == 0} handlePick = {handlePick}/>
-          <Options handleDelecte ={handleDelecte} options={options} delecteOption={delecteOptions}/>
-          <AddOption handleAddOption={handleAddOption}/>
-        </div>      
+          <div className="widget">
+            <Options handleDelecte ={handleDelecte} options={options} delecteOption={delecteOptions}/>
+            <AddOption handleAddOption={handleAddOption}/>
+          </div>
+        </div>  
+        <OptionModal handleselectoption={handleselectoption} selectoption={selectoption}/>   
       </div>
-      )
-  }
+    )
+}
 
 
   

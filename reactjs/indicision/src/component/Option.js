@@ -1,7 +1,7 @@
 const Option = (props) =>{
     return(
-      <div > 
-        {props.optiontext}
+      <div className="option"> 
+        <p className="option__text">{props.optiontext}</p>
         <button 
         className="button--link"
         onClick={()=>props.delecteOption(props.optiontext)}>remove</button>
