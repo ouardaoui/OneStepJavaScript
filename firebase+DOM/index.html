@@ -1,0 +1,85 @@
+<html>
+    <head>
+        <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-firestore.js"></script>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+
+        <h1>Cloud Cafe</h1>
+
+        <div class="content">
+
+            <form id="add-cafe-form"></form>
+
+            <ul id="cafe-list"></ul>
+
+        </div>
+
+        <script>
+            // Initialize Firebase
+            var config = {
+            apiKey: "AIzaSyDYz5Lhoey2g0FamhhseUUd2Et6d2eMzEQ",
+            authDomain: "quickproject-caa1e.firebaseapp.com",
+            projectId: "quickproject-caa1e",
+            storageBucket: "quickproject-caa1e.appspot.com",
+            messagingSenderId: "108391026708",
+            appId: "1:108391026708:web:ba2e3a9c76ab68447f5701",
+            measurementId: "G-SQF12QSHBZ"             
+            };
+            firebase.initializeApp(config);
+            const db = firebase.firestore();
+            db.settings({ timestampsInSnapshots: true }); 
+        </script>
+        <script src="app.js"></script>
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
