@@ -1,8 +1,11 @@
 import AppRouters from "./routers/AppRouters"
+import Provider from "./context/Context";
 function App() {
-  
+
   return (
-    <AppRouters/>
+    <Provider>
+      <AppRouters />
+    </Provider>
   );
 }
 
