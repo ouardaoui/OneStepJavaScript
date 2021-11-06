@@ -5,20 +5,22 @@ import HelpExpensivePage from "../component/HelpExpensivePage"
 import EditExpensivePage from "../component/EditExpensivePage"
 import AddExpensivePage from "../component/AddExpensivePage"
 import ExpensiveDashboardPage from "../component/ExpensiveDashboardPage"
-import MyTest from "../component/MyTest";
+
+import Provider from "../context/Context";
 const AppRouters = () => {
 
     return (
         <BrowserRouter>
-            <Header />
-            <Switch>
-                <Route path="/" component={ExpensiveDashboardPage} exact />
-                <Route path="/add" component={AddExpensivePage} />
-                <Route path="/edit/:id" component={EditExpensivePage} />
-                <Route path="/help" component={HelpExpensivePage} />
-                <Route path="/test" component={MyTest} />
-                <Route component={Notfound} />
-            </Switch>
+            <Provider>
+                <Header />
+                <Switch>
+                    <Route path="/" component={ExpensiveDashboardPage} exact />
+                    <Route path="/add" component={AddExpensivePage} />
+                    <Route path="/edit/:id" component={EditExpensivePage} />
+                    <Route path="/help" component={HelpExpensivePage} />
+                    <Route component={Notfound} />
+                </Switch>
+            </Provider>
         </BrowserRouter>
     );
 }
