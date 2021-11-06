@@ -1,22 +1,22 @@
 import { createContext, useReducer } from "react";
 import { Reducer } from "../reducer/reducer";
+import { v4 as uuid } from 'uuid';
 
 export const TestContext = createContext();
 const Provider = ({ children }) => {
-  const [state, dispatch] = useReducer(Reducer, 0);
-  const increment = (payload) => {
-    dispatch({ type: "INCREMENT", payload })
+  const initState = {
+    expense: [],
+    filters: {
+      test: "",
+      sortBy: "data",
+      startDate: undefined,
+      endDate: undefined
+    }
   }
-  const decrement = (payload) => {
-    dispatch({ type: "DECREMENT", payload })
-  }
-  const reset = () => {
-    dispatch({ type: "RESET" })
-  }
-
+  const [state, dispatch] = useReducer(Reducer, initState);
 
   return (
-    <TestContext.Provider value={{ state, increment, decrement, reset }}>
+    <TestContext.Provider value={{ state, dispatch }}>
       {children}
     </TestContext.Provider>
   )
