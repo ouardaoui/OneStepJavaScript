@@ -2,7 +2,7 @@ import { createContext, useReducer, useEffect } from "react";
 import { Reducers } from "../reducer/reducer";
 import { v4 as uuid } from 'uuid';
 
-export const TestContext = createContext();
+export const TextContext = createContext();
 const Provider = ({ children }) => {
   const initState = {
     expense: [],
@@ -14,39 +14,88 @@ const Provider = ({ children }) => {
     }
   }
   const [state, dispatch] = useReducer(Reducers(), initState);
-
   //AD_EXPENSIVE
-  const addexpense = ({ description, amount } = {}) => ({
-    type: "ADD_EXPENSE", expense: { description, amount, id: uuid() }
-  })
+  const addexpense = ({ description, amount, createAt } = {}) => {
+    dispatch({
+      type: "ADD_EXPENSE", expense: { description, amount, createAt, id: uuid() }
+    })
+  }
   //REMOVE_EXPENSE
-  const removexpense = (id) => ({
-    type: "REMOVE_EXPENSE", id
-  })
+  const removexpense = () => {
+    return (id) => dispatch({
+      type: "REMOVE_EXPENSE", id
+    })
+  }
+
+
   //EDIT_EXPENSE
-  const editexpense = (id, update) => ({
-    type: "EDIT_EXPENSE", id, update
-  })
-  const settextfilter = (text) => ({
-    type: "SET_TEXT_FILTER", text
-  })
+  const editexpense = () => {
+    return (id, update) =>
+      dispatch({
+        type: "EDIT_EXPENSE", id, update
+      })
+  }
+  //SET_TEXT_FILTER
+  const settextfilter = () => {
+    return (text) =>
+      dispatch({
+        type: "SET_TEXT_FILTER", text
+      })
+  }
+  //SORT_BY_DATE
+  const sortByDate = () => {
+    dispatch({
+      type: "SORT_BY_DATE"
+    })
+  }
+  //SORT_BY_AMOUNT
+  const sortByAmount = () => {
+    dispatch({
+      type: "SORT_BY_AMOUNT"
+    })
+  }
+  //SET_START_DATE
+  const setStartDate = () => {
+    return (startDate) =>
+      dispatch({
+        type: "SET_START_DATE", startDate
+      })
+  }
 
-  const expense1 = (addexpense({ description: "Rent", amount: 300 }))
-  const expense2 = (addexpense({ description: "Rent", amount: 4500 }))
-  useEffect(() => {
-    dispatch(expense1)
-    dispatch(expense2)
-    // dispatch(removexpense(expense1.expense.id))
-    dispatch(editexpense(expense2.expense.id, { amount: 450 }))
-    dispatch(settextfilter("rent"))
-    dispatch(settextfilter("onther"))
-  }, [])
+  //SET_END_DATE
+  const setEndDate = () => {
+    return (endDate) =>
+      dispatch({
+        type: "SET_END_DATE", endDate
+      })
+  }
+  // GET_VISIBLE_EXPENSE
+  const getvisibleexpense = (expenses, { text, sortBy, startDate, endDate }) => {
+    return expenses.filter(expense => {
+      // using typeof and or for handling undifined error(aontherword to valide undifined case)
+      const startDateMatch = typeof startDate !== "number" || expense.createAt >= startDate;
+      const endDateMatch = typeof endDate !== "number" || expense.createAt <= endDate;;
+      const textMatch = expense.description.toLowerCase().includes(text.toLowerCase());
+      return startDateMatch && endDateMatch && textMatch
+    }).sort((a, b) => {
+      if (sortBy === "date") {
+        return a.createAt < b.createAt ? 1 : -1
+      } else if (sortBy === "amount") {
+        return b.amount < b.amount ? 1 : -1
+      }
+    })
+  }
 
-  console.log(state)
+
+
+  // console.log(getvisibleexpense(state.expense, state.filters))
+
+
+
   return (
-    <TestContext.Provider value={{ state, dispatch }}>
+    <TextContext.Provider value={{ state, addexpense, removexpense, editexpense, settextfilter, sortByAmount, sortByDate, setEndDate, setEndDate, setStartDate, getvisibleexpense }}>
       {children}
-    </TestContext.Provider>
+    </TextContext.Provider>
   )
 }
 export default Provider;

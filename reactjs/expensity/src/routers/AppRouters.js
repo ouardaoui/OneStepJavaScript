@@ -10,8 +10,8 @@ import Provider from "../context/Context";
 const AppRouters = () => {
 
     return (
-        <BrowserRouter>
-            <Provider>
+        <Provider>
+            <BrowserRouter>
                 <Header />
                 <Switch>
                     <Route path="/" component={ExpensiveDashboardPage} exact />
@@ -20,8 +20,8 @@ const AppRouters = () => {
                     <Route path="/help" component={HelpExpensivePage} />
                     <Route component={Notfound} />
                 </Switch>
-            </Provider>
-        </BrowserRouter>
+            </BrowserRouter>
+        </Provider>
     );
 }
 
