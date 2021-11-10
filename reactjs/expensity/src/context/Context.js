@@ -15,33 +15,31 @@ const Provider = ({ children }) => {
   }
   const [state, dispatch] = useReducer(Reducers(), initState);
   //AD_EXPENSIVE
-  const addexpense = ({ description, amount, createAt } = {}) => {
+  const addexpense = ({ description, amount, createAt = 0 } = {}) =>
     dispatch({
       type: "ADD_EXPENSE", expense: { description, amount, createAt, id: uuid() }
     })
-  }
+
   //REMOVE_EXPENSE
-  const removexpense = () => {
-    return (id) => dispatch({
+  const removexpense = (id) => {
+    dispatch({
       type: "REMOVE_EXPENSE", id
     })
   }
 
 
   //EDIT_EXPENSE
-  const editexpense = () => {
-    return (id, update) =>
-      dispatch({
-        type: "EDIT_EXPENSE", id, update
-      })
-  }
+  const editexpense = (id, update) =>
+    dispatch({
+      type: "EDIT_EXPENSE", id, update
+    })
+
   //SET_TEXT_FILTER
-  const settextfilter = () => {
-    return (text) =>
-      dispatch({
-        type: "SET_TEXT_FILTER", text
-      })
-  }
+  const settextfilter = (text) =>
+    dispatch({
+      type: "SET_TEXT_FILTER", text
+    })
+
   //SORT_BY_DATE
   const sortByDate = () => {
     dispatch({
@@ -55,12 +53,11 @@ const Provider = ({ children }) => {
     })
   }
   //SET_START_DATE
-  const setStartDate = () => {
-    return (startDate) =>
-      dispatch({
-        type: "SET_START_DATE", startDate
-      })
-  }
+  const setStartDate = (startDate) =>
+    dispatch({
+      type: "SET_START_DATE", startDate
+    })
+
 
   //SET_END_DATE
   const setEndDate = () => {
@@ -76,6 +73,7 @@ const Provider = ({ children }) => {
       const startDateMatch = typeof startDate !== "number" || expense.createAt >= startDate;
       const endDateMatch = typeof endDate !== "number" || expense.createAt <= endDate;;
       const textMatch = expense.description.toLowerCase().includes(text.toLowerCase());
+      console.log(textMatch)
       return startDateMatch && endDateMatch && textMatch
     }).sort((a, b) => {
       if (sortBy === "date") {
@@ -85,6 +83,13 @@ const Provider = ({ children }) => {
       }
     })
   }
+  useEffect(() => {
+    setTimeout(() => {
+
+    }, 3000);
+
+  }, [])
+
 
 
 

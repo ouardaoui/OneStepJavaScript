@@ -2,15 +2,13 @@ import React, { useContext, useEffect } from "react";
 import { TextContext } from "../context/Context";
 
 const AddExpensivePage = () => {
-    const { state, addexpense } = useContext(TextContext)
+    const { state, addexpense, sortByAmount } = useContext(TextContext)
     useEffect(() => {
         addexpense({ description: "Rent", amount: "450", createAt: 200 })
-        addexpense({ description: "Coffee", amount: "400", createAt: 400 })
-        addexpense({ description: "Rent", amount: "450", createAt: 20 })
-        addexpense({ description: "Rent", amount: "450", createAt: 20 })
+        sortByAmount()
         console.log(state)
 
     }, [])
-    return (<p>{state.expense.length}</p>);
+    return (<p>{state.expense.length, state.filters.sortBy}</p>);
 }
 export default AddExpensivePage;
