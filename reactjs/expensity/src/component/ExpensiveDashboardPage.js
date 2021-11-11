@@ -1,10 +1,11 @@
 import React from "react";
 import ExpenseList from "./ExpenseList";
+import ExpenseListFilters from "./ExpenseListFilters"
 
 const ExpensiveDashboardPage = () => {
     return (
         <>
-            <p>"This is from my dashborad home page"</p>
+            <ExpenseListFilters />
             <ExpenseList />
         </>
     );

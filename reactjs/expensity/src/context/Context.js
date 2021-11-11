@@ -8,7 +8,7 @@ const Provider = ({ children }) => {
     expense: [],
     filters: {
       text: "",
-      sortBy: "data",
+      sortBy: "date",
       startDate: undefined,
       endDate: undefined
     }
@@ -73,13 +73,14 @@ const Provider = ({ children }) => {
       const startDateMatch = typeof startDate !== "number" || expense.createAt >= startDate;
       const endDateMatch = typeof endDate !== "number" || expense.createAt <= endDate;;
       const textMatch = expense.description.toLowerCase().includes(text.toLowerCase());
-      console.log(textMatch)
       return startDateMatch && endDateMatch && textMatch
     }).sort((a, b) => {
       if (sortBy === "date") {
         return a.createAt < b.createAt ? 1 : -1
+
       } else if (sortBy === "amount") {
-        return b.amount < b.amount ? 1 : -1
+
+        return a.amount < b.amount ? 1 : -1
       }
     })
   }

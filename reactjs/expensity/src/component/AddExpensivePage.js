@@ -1,14 +1,11 @@
-import React, { useContext, useEffect } from "react";
-import { TextContext } from "../context/Context";
+import ExpenseForm from "./ExpenseForm";
 
 const AddExpensivePage = () => {
-    const { state, addexpense, sortByAmount } = useContext(TextContext)
-    useEffect(() => {
-        addexpense({ description: "Rent", amount: "450", createAt: 200 })
-        sortByAmount()
-        console.log(state)
-
-    }, [])
-    return (<p>{state.expense.length, state.filters.sortBy}</p>);
+    return (
+        <>
+            <h1>Add expense</h1>
+            <ExpenseForm />
+        </>
+    );
 }
 export default AddExpensivePage;

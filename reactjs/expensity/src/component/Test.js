@@ -1,12 +1,23 @@
+import React, { useState } from "react";
+import "react-dates/initialize";
+import { SingleDatePicker } from "react-dates";
+import "react-dates/lib/css/_datepicker.css";
 
-const Test0 = (props) => {
-  console.log(props)
+function App() {
+  const [state, setState] = useState({ date: null, focused: false })
+
+  console.log(state)
   return (
-    <div>
-      <h1>test</h1>
-      <p hello="Hello">"just testing"</p>
+    <div className="App">
+      <SingleDatePicker
+        date={state.data}
+        onDateChange={(date) => setState({ ...state, date })}
+        focused={state.focused}
+        onFocusChange={({ focused }) => setState({ ...state, focused })}
+        id="date"
+      />
     </div>
-  )
+  );
 }
 const HigerOrderCompenent = (WrappedCompenent) => {
   return (props) => (
@@ -17,6 +28,6 @@ const HigerOrderCompenent = (WrappedCompenent) => {
   )
 }
 
-const Test = HigerOrderCompenent(Test0)
+const Test = HigerOrderCompenent(App)
 
 export default Test;
