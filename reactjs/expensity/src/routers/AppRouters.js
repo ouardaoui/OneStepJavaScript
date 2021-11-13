@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "../component/Header"
-import Notfound from "../component/Notfound"
 import HelpExpensivePage from "../component/HelpExpensivePage"
 import EditExpensivePage from "../component/EditExpensivePage"
 import AddExpensivePage from "../component/AddExpensivePage"
@@ -19,7 +18,6 @@ const AppRouters = () => {
                     <Route path="edit/:id" element={<EditExpensivePage />} />
                     <Route path="help" element={<HelpExpensivePage />} />
                     <Route path="test" element={<Test info={5} />} />
-                    <Route element={<Notfound />} />
                 </Routes>
             </BrowserRouter>
         </Provider>

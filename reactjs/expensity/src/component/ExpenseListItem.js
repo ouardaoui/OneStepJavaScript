@@ -1,13 +1,14 @@
-import React, { useContext } from "react"
-import { TextContext } from "../context/Context";
+
+import { Link } from "react-router-dom";
+import moment from "moment";
 
 const ExpenseListItem = ({ description, createAt, amount, id }) => {
-  const { removexpense } = useContext(TextContext)
   return (
     <>
-      <h3>{description}</h3>
-      <p>{amount}$ - {createAt}</p>
-      <button onClick={() => removexpense(id)}>remove</button>
+      <Link to={`edit/${id}`} >
+        <h3>{description}</h3>
+      </Link>
+      <p>{amount}$ - {moment(createAt).format('LL')}</p>
     </>
   )
 }

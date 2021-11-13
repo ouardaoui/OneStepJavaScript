@@ -1,20 +1,43 @@
 import React, { useState } from "react";
 import "react-dates/initialize";
-import { SingleDatePicker } from "react-dates";
+import { SingleDatePicker, DateRangePicker } from "react-dates";
 import "react-dates/lib/css/_datepicker.css";
 
-function App() {
-  const [state, setState] = useState({ date: null, focused: false })
 
-  console.log(state)
+function App() {
+  const [date, setDate] = useState()
+  const [focused, setFocused] = useState()
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const [focusedInput, setFocusedInput] = useState(null);
+  const handleDatesChange = ({ startDate, endDate }) => {
+    setStartDate(startDate);
+    setEndDate(endDate);
+  };
+
+
+
+
   return (
     <div className="App">
       <SingleDatePicker
-        date={state.data}
-        onDateChange={(date) => setState({ ...state, date })}
-        focused={state.focused}
-        onFocusChange={({ focused }) => setState({ ...state, focused })}
+        date={date}
+        onDateChange={(date) => setDate(date)}
+        focused={focused}
+        onFocusChange={({ focused }) => setFocused(focused)}
         id="date"
+      />
+      <DateRangePicker
+        startDate={startDate}
+        startDateId="tata-start-date"
+        endDate={endDate}
+        endDateId="tata-end-date"
+        onDatesChange={handleDatesChange}
+        focusedInput={focusedInput}
+        showClearDates={true}
+        numberOfMonths={1}
+        isOutsideRange={() => false}
+        onFocusChange={focusedInput => setFocusedInput(focusedInput)}
       />
     </div>
   );

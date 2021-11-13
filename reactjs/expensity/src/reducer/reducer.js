@@ -1,3 +1,4 @@
+import moment from "moment";
 
 export const ExpenseReducer = (state = [], action) => {
   switch (action.type) {
@@ -23,8 +24,8 @@ export const ExpenseReducer = (state = [], action) => {
 export const FilterReducer = (state = {
   text: "",
   sortBy: "data",
-  startDate: undefined,
-  endDate: undefined
+  startDate: moment().startOf("month"),
+  endDate: moment().endOf("month")
 }, action) => {
   switch (action.type) {
     case "SET_TEXT_FILTER":

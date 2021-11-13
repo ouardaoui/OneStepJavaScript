@@ -1,6 +1,7 @@
-import { createContext, useReducer, useEffect } from "react";
+import { createContext, useReducer } from "react";
 import { Reducers } from "../reducer/reducer";
 import { v4 as uuid } from 'uuid';
+import moment from "moment";
 
 export const TextContext = createContext();
 const Provider = ({ children }) => {
@@ -9,8 +10,8 @@ const Provider = ({ children }) => {
     filters: {
       text: "",
       sortBy: "date",
-      startDate: undefined,
-      endDate: undefined
+      startDate: moment().startOf("month"),
+      endDate: moment().endOf("month"),
     }
   }
   const [state, dispatch] = useReducer(Reducers(), initState);
@@ -60,18 +61,18 @@ const Provider = ({ children }) => {
 
 
   //SET_END_DATE
-  const setEndDate = () => {
-    return (endDate) =>
-      dispatch({
-        type: "SET_END_DATE", endDate
-      })
+  const setEndDate = (endDate) => {
+    dispatch({
+      type: "SET_END_DATE", endDate
+    })
   }
   // GET_VISIBLE_EXPENSE
   const getvisibleexpense = (expenses, { text, sortBy, startDate, endDate }) => {
     return expenses.filter(expense => {
       // using typeof and or for handling undifined error(aontherword to valide undifined case)
-      const startDateMatch = typeof startDate !== "number" || expense.createAt >= startDate;
-      const endDateMatch = typeof endDate !== "number" || expense.createAt <= endDate;;
+      const createAtMomet = moment(expense.createAt)
+      const startDateMatch = startDate ? startDate.isSameOrBefore(createAtMomet, "day") : true;
+      const endDateMatch = endDate ? endDate.isSameOrAfter(createAtMomet, "day") : true;
       const textMatch = expense.description.toLowerCase().includes(text.toLowerCase());
       return startDateMatch && endDateMatch && textMatch
     }).sort((a, b) => {
@@ -84,22 +85,8 @@ const Provider = ({ children }) => {
       }
     })
   }
-  useEffect(() => {
-    setTimeout(() => {
-
-    }, 3000);
-
-  }, [])
-
-
-
-
-  // console.log(getvisibleexpense(state.expense, state.filters))
-
-
-
   return (
-    <TextContext.Provider value={{ state, addexpense, removexpense, editexpense, settextfilter, sortByAmount, sortByDate, setEndDate, setEndDate, setStartDate, getvisibleexpense }}>
+    <TextContext.Provider value={{ state, addexpense, removexpense, editexpense, settextfilter, sortByAmount, sortByDate, setEndDate, setStartDate, getvisibleexpense }}>
       {children}
     </TextContext.Provider>
   )
